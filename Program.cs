@@ -27,11 +27,11 @@ class Program
 
         while (running)
         {
-            Console.WriteLine("\n--- GÖREV TAKİP SİSTEMİ ---");
             Console.WriteLine("1- Görev Ekle");
             Console.WriteLine("2- Görevleri Listele");
             Console.WriteLine("3- Görev Tamamla");
-            Console.WriteLine("4- Çıkış");
+            Console.WriteLine("4- Görev Sil");
+            Console.WriteLine("5- Çıkış");
 
             Console.Write("Seçiminiz: ");
             string choice = Console.ReadLine();
@@ -85,7 +85,29 @@ class Program
                     }
                     break;
 
-                case "4":
+                case "4": 
+                    Console.Write("Silinecek görev ID: ");
+                    int deleteId;
+                    if (int.TryParse(Console.ReadLine(), out deleteId))
+                    {
+                        var taskToRemove = tasks.Find(t => t.Id == deleteId);
+                        if (taskToRemove != null)
+                        {
+                            tasks.Remove(taskToRemove);
+                            Console.WriteLine("Görev başarıyla silindi.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Görev bulunamadı.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Geçersiz ID girdiniz.");
+                    }
+                    break;
+
+                case "5": 
                     running = false;
                     break;
 
